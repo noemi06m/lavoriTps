@@ -1,0 +1,194 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tabella da file CSV</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+      </head>
+      <body>
+        <input onchange="readFile(this)" type="file">
+        
+      
+        <div id="table-container" class="container mt-4"></div>
+        <div style="text-align: center;" width="100%">
+        <canvas id="myCanvas" width="" height="" style="background-color: rgb(255, 255, 255);border: 1px solid rgb(0,0,0);"></canvas>
+        <div id="data-container" style="text-align: center;" width="100%"></div>
+      </div>
+      <br>
+    
+      
+        <script>
+            
+          function readFile(input) {
+            let file = input.files[0];
+            let fileReader = new FileReader();
+            fileReader.readAsText(file);
+            var cont=0;
+            fileReader.onload = function() {
+              var csvData = fileReader.result;
+              var rows = csvData.split("\n");
+              var tableHTML = '<table class="table table-striped"><thead><tr>';
+              cont=0
+
+              var headers = rows[0].split(",");
+              for (var i = 0; i < headers.length; i++) {
+                tableHTML += '<th>' + headers[i] + '</th>';
+              }
+              tableHTML += '</tr></thead><tbody>';
+      
+                
+              for (var j = 1; j < rows.length; j++) {
+                var rowData = rows[j].split(",");
+                tableHTML += '<tr>';
+                
+                for (var k = 0; k < rowData.length; k++) {
+                  if (k%2!=0){
+                    tableHTML += '<td id="i'+cont+'" value='+rowData[k]+'>' + rowData[k] + '</td>';
+                  }
+                  else {
+                    tableHTML += '<td id="d'+cont+'" value='+rowData[k]+'>' + rowData[k] + '</td>';
+                  }
+                  
+                }
+                tableHTML += '</tr>';
+                cont++
+              }
+      
+              tableHTML += '</tbody></table>';
+      
+              
+              document.getElementById('table-container').innerHTML = tableHTML;
+              createGrid(cont)
+            }
+            
+          }
+
+            var a=0;
+            var b=0;
+            var canvas=document.getElementById("myCanvas");
+            var ctx=canvas.getContext("2d")
+
+          function createGrid(num){
+            //Tentativo Height Modificabile
+            /*var h=0
+            for (var r=0;r<num;r++){
+              var check=parseInt(document.getElementById("i"+r).innerText)
+              if (check>=h){
+                h=check
+              }
+            }
+
+            check=(h*10)+10
+            
+            canvas.setAttribute("height",check)*/
+
+            canvas.setAttribute("width",(num*50)+50)
+            canvas.setAttribute("height",(500))
+            var width=canvas.width
+            var height=canvas.height
+            console.log("Larghezza: "+width)
+
+            a=25
+            b=50
+            var c=50;
+            ctx.strokeStyle = "#e8e8e8";
+            ctx.lineWidth=1;
+
+            //Generatore Righe Orizzontali
+            for (var i=0;i<=height;i=i+50){
+                ctx.beginPath()
+                ctx.moveTo(a,b)
+                ctx.lineTo(width,b)
+                ctx.stroke()
+                b=b+c
+            }
+
+            //Generatore Righe Verticali
+            a=0
+            b=50
+            
+            for (var i=0;i<=width;i=i+50){
+                ctx.beginPath()
+                ctx.moveTo(b,a)
+                ctx.lineTo(b,height-10)
+                ctx.stroke()
+                b=b+c
+            }
+
+            //Scritta Temperatura
+              var tempSign=45
+              ctx.fillStyle = "rgb(0,0,0)";
+              ctx.font = "10px Arial";
+              for (var t=50;tempSign>=5;t=t+50){
+                ctx.fillText(tempSign,10,t+2);
+                tempSign-=5
+              }
+            drawGraph(num)
+          }
+
+          c=25;
+          d=25
+          contel=0;
+
+          function drawGraph(num1){
+            c=25;
+            d=25
+            var height=canvas.height
+            var width=canvas.width
+
+            spacing=50;
+            
+            for (var k=0;k<=num1;k++){
+              var h=parseInt(document.getElementById("i"+k).innerText)
+
+              //Barre grigie
+              ctx.strokeStyle ="rgb(150,150,150)";
+              ctx.beginPath()
+              ctx.moveTo(spacing,height-25)
+              ctx.lineTo(spacing,height-(h*10))
+              ctx.stroke()
+              
+              //Generatore colore
+              var red=Math.random()*255
+              var green=Math.random()*255
+              var blue=Math.random()*255
+              ctx.strokeStyle ="rgb("+red+","+green+","+blue+")";
+
+              //Grafico linee
+              ctx.beginPath()
+              ctx.moveTo(c,height-d)
+              ctx.lineTo(spacing,height-(h*10))
+              ctx.stroke()
+
+              //Pallini
+              ctx.beginPath();
+              ctx.arc(spacing,height-(h*10),2,1,2*Math.PI);
+              ctx.fillStyle = "rgb("+red+","+green+","+blue+")";;
+              ctx.fill();
+              ctx.stroke();
+
+              //Scritta Anno
+              ctx.fillStyle = "rgb(0,0,0)";;
+              ctx.font = "10px Arial";
+              ctx.fillText(document.getElementById("d"+k).innerText,spacing-10,height-12.5);
+              
+              //Scritta su Pallino
+              ctx.fillStyle = "rgb("+red+","+green+","+blue+")";;
+              ctx.font = "12px Arial";
+              ctx.fillText(document.getElementById("i"+k).innerText+" C°",spacing-10,height-(h*10)-10);
+
+              c=spacing
+              d=h*10
+              spacing+=50
+            }
+            
+            ctx.beginPath()
+              ctx.moveTo(c,d)
+              ctx.lineTo(width,0)
+              ctx.stroke()
+          }
+        </script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+      </body>
+</html>
