@@ -25,18 +25,6 @@
         "eta":"59",
         "telefono":[
             {"casa":"3940321234"},{"ufficio":"3334859432"},{"mobile":"4839213456"}
-        ],
-        "img":"https://img.freepik.com/foto-gratuito/il-ritratto-della-giovane-donna-con-emozioni-pensierose_155003-11484.jpg?semt=ais_hybrid"
-        
-     },
-     {
-        "nome":"tommaso",
-        "cognome":"sosani",
-        "indirizzo":"sosani.tommy8@libero.it",
-        "eta":"35",
-        "telefono":[
-            {"casa":"3334758496"},{"ufficio":"3748393432"},{"mobile":"3345678943"}
-        ],
-        "img":"https://plus.unsplash.com/premium_photo-1689530775582-83b8abdb5020?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww"
+        ],        
      }
 ]
