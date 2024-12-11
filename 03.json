@@ -1,0 +1,13 @@
+[
+    {  "id":"03",
+        "nome":"anna",
+        "cognome":"pepe",
+        "indirizzo":"annapepe333@gmail.com",
+        "eta":"59",
+        "telefono":[
+            {"casa":"3940321234"},{"ufficio":"3334859432"},{"mobile":"4839213456"}
+        ],
+        "img":"https://img.freepik.com/foto-gratuito/il-ritratto-della-giovane-donna-con-emozioni-pensierose_155003-11484.jpg?semt=ais_hybrid"
+        
+     }
+]
