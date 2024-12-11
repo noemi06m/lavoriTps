@@ -1,0 +1,12 @@
+[
+    {"id":"02",
+"nome":"barbara",
+"cognome":"vetri",
+"indirizzo":"barbara.vetri78@libero.it",
+"eta":"33",
+"telefono":[
+    {"casa":"29394302345"},{"ufficio":"3334839321"},{"mobile":"3849321234"}
+],
+"img":"https://img.freepik.com/foto-gratuito/close-up-donna-sorridente-in-posa_23-2149178089.jpg"
+}
+]
