@@ -1,0 +1,25 @@
+<html>
+    <style>
+        body{
+            background-color: lightblue;
+        }
+    </style>
+    <body>
+        <p id="stampa"></p>
+    </body>
+    <script>
+        let g = location.search;
+        let url = g.split("=");
+        document.getElementById("stampa").innerHTML = url;
+
+        var xmlhttp = new XMLHttpRequest();
+        
+        xmlhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                var myOb = JSON.parse(this.responseText);
+
+
+            }
+        }
+    </script>
+</html>
