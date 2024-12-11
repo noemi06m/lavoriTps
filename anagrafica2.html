@@ -5,6 +5,8 @@
         }
         table{
             border: 5px solid rgb(0, 0, 0);
+            width: 500px;
+            
         }
         tr{
             background-color:rgb(214, 255, 148);
@@ -15,13 +17,14 @@
     </body>
     <script>
         var xmlhttp = new XMLHttpRequest();
-        let j;
+        var j;
+        var k;
         
         xmlhttp.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
                 var myObj = JSON.parse(this.responseText);
                 
-                for(let i=0; i<myObj.length;i++){
+                for(var i=0; i<myObj.length;i++){
                     
                     let table = document.createElement("table");
                     let riga = document.createElement("tr");
@@ -52,12 +55,19 @@
                         } 
                     riga.appendChild(cella5);
 
+                    let a = document.createElement("a");
+                    a.setAttribute("href","cv.html?id="+myObj[i].id);
+
                     
-                    h = createElement("a");
-                    h.setAttribute(href,"cv.html?id"+ myObj.id);
+
+
+                    
                     im = document.createElement("img");
-                    im.src = myObj.link;
-                    cella6.appendChild(im);
+                    im.setAttribute("src", myObj[i]["img"]);
+                    im.setAttribute("style", "width:100px", "height:100px");
+                    a.appendChild(im)
+
+                    cella6.appendChild(a);
                     riga.appendChild(cella6);
                     
 
@@ -66,7 +76,8 @@
                 }
             }
         }
-        xmlhttp.open("GET", "ancomplessa2.JSON", true);
+        xmlhttp.open("GET", "ancomplessa2.json"+"01.json"+"02.json"+"03.json", true);
         xmlhttp.send();
     </script>
 </html>
+
