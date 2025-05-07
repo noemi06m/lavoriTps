@@ -15,8 +15,8 @@ app.get("/pag2", (req, res) => {
 });
 
 app.post("/submit", (req, res) => {
-    const userInput = req.body.text; 
-    res.send(`<h1>il tuo nome e': ${userInput}</h1><br><a href="/">Torna</a>`);
+    const userInput = req.body.nome; 
+    res.send(`<h1>il tuo nome e: ${userInput}</h1><br><a href="/">Torna</a>`);
 });
 
 
